@@ -6,14 +6,18 @@ export class Player extends Phaser.GameObjects.Sprite {
         this.scene = scene;
 
         // player variables
-        this.velocityMaxX = 500;
-        this.velocityMaxY = 500;
+        this.velocityMaxX = 100;
+        this.velocityMaxY = 100;
 
-        this.accelerationX = 100;
-        this.accelerationY = 100;
+        this.accelerationX = 500;
+        this.accelerationY = 500;
+
+        this.decelerationX = 800;
+        this.decelerationY = 800;
 
         // declare maximum velocity in x and y directions
         this.body.maxVelocity.set(this.velocityMaxX, this.velocityMaxY);
+        this.body.setDrag(this.decelerationX, this.decelerationY);
 
         // constrols
         this.keyW = this.scene.input.keyboard.addKey("W", false, true);

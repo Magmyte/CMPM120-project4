@@ -51,6 +51,10 @@ export class Player extends Phaser.GameObjects.Sprite {
         {
             this.body.setAccelerationX(moveX * this.accelerationX);
         }
+        else
+        {
+            this.body.setAccelerationX(0);
+        }
 
         // check for vertical movement
         let moveY = 0;
@@ -67,6 +71,10 @@ export class Player extends Phaser.GameObjects.Sprite {
         if (moveY != 0)
         {
             this.body.setAccelerationY(moveY * this.accelerationY);
+        }
+        else
+        {
+            this.body.setAccelerationY(0);
         }
     }
 }

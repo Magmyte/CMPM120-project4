@@ -1,3 +1,5 @@
+import { Projectile } from "./projectile.js";
+
 export class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
@@ -15,11 +17,17 @@ export class Player extends Phaser.GameObjects.Sprite {
         this.decelerationX = 800;
         this.decelerationY = 800;
 
+        // player flags
+        this.facingRight = true;
+        this.facingDown = true;
+
+        this.lastFace = "up";
+
         // declare maximum velocity in x and y directions
         this.body.maxVelocity.set(this.velocityMaxX, this.velocityMaxY);
         this.body.setDrag(this.decelerationX, this.decelerationY);
 
-        // constrols
+        // controls
         this.keyW = this.scene.input.keyboard.addKey("W", false, true);
         this.keyA = this.scene.input.keyboard.addKey("A", false, true);
         this.keyS = this.scene.input.keyboard.addKey("S", false, true);
@@ -31,6 +39,47 @@ export class Player extends Phaser.GameObjects.Sprite {
         this.right = this.scene.input.keyboard.addKey("RIGHT", false, true);
 
         this.space = this.scene.input.keyboard.addKey("SPACE", false, false);
+
+        // check for last faced direction
+        this.keyW.on("down", () =>
+        {
+            this.lastFace = "up";
+        });
+
+        this.up.on("down", () =>
+        {
+            this.lastFace = "up";
+        });
+
+        this.keyA.on("down", () =>
+        {
+            this.lastFace = "left";
+        });
+
+        this.left.on("down", () =>
+        {
+            this.lastFace = "left";
+        });
+
+        this.keyS.on("down", () =>
+        {
+            this.lastFace = "down";
+        });
+
+        this.down.on("down", () =>
+        {
+            this.lastFace = "down";
+        });
+
+        this.keyD.on("down", () =>
+        {
+            this.lastFace = "right";
+        });
+
+        this.right.on("down", () =>
+        {
+            this.lastFace = "right";
+        });
     }
 
     preUpdate(time, dTime) {
@@ -75,6 +124,83 @@ export class Player extends Phaser.GameObjects.Sprite {
         else
         {
             this.body.setAccelerationY(0);
+        }
+
+        // adjust facing flags
+        if ((moveX < 0 && this.facingRight) || (moveX > 0 && !this.facingRight))
+        {
+            this.facingRight = !this.facingRight;
+        }
+
+        if ((moveY < 0 && this.facingDown) || (moveY > 0 && !this.facingDown))
+        {
+            this.facingDown = !this.facingDown;
+        }
+    }
+
+    // fire bow function
+    bow(check) {
+
+        if (check)
+        {
+            // do a thing - TODO
+            var direction = 0;
+
+            switch (this.lastFace)
+            {
+                case "right":
+                    direction = 0;
+                    break;
+                case "down":
+                    direction = 90;
+                    break;
+                case "left":
+                    direction = 180;
+                    break;
+                case "up":
+                    direction = 270;
+                    break;
+            }
+
+            fire = new Projectile(this.scene, this.x, this.y, 'sprite', direction, 200, 10000);
+            this.scene.physics.add(fire);
+            // add to group
+        }
+    }
+
+    // swing sword function
+    sword(check) {
+
+        if (check)
+        {
+            // do a thing - TODO
+            var direction = 0;
+            var xOffset = 0;
+            var yOffset = 0;
+
+            switch (this.lastFace)
+            {
+                case "right":
+                    direction = 0;
+                    xOffset = 20;
+                    break;
+                case "down":
+                    direction = 90;
+                    yOffset = 20;
+                    break;
+                case "left":
+                    direction = 180;
+                    xOffset = -20;
+                    break;
+                case "up":
+                    direction = 270;
+                    yOffset = 20;
+                    break;
+            }
+
+            swing = new Projectile(this.scene, this.x + xOffset, this.y + yOffset, 'sprite', direction, 0, 300);
+            this.scene.physics.add(swing);
+            // add to group
         }
     }
 }

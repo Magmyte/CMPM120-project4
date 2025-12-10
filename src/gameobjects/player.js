@@ -1,6 +1,7 @@
 export class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
+        this.setScale(0.95);
         scene.physics.add.existing(this);
 
         this.scene = scene;
@@ -31,6 +32,8 @@ export class Player extends Phaser.GameObjects.Sprite {
 
         this.space = this.scene.input.keyboard.addKey("SPACE", false, false);
         this.spaceWasDown = false;
+
+        this.facingRight = true;
 
         // --- HEALTH ---
         this.maxHealth = 10;
@@ -95,9 +98,31 @@ export class Player extends Phaser.GameObjects.Sprite {
             this.body.setAccelerationY(0);
         }
 
+        // cap diagonal movement
+        let diagonalMove = Math.sqrt(this.body.velocity.x ** 2 + this.body.velocity.y ** 2);
+        if (diagonalMove > this.maxVelocityX)
+        {
+            this.body.setVelocityX(this.body.velocity.x * this.maxVelocityX / diagonalMove);
+            this.body.setVelocityY(this.body.velocity.y * this.maxVelocityX / diagonalMove);
+        }
+
         // update facing direction if moving
         if (moveX !== 0 || moveY !== 0) {
             this.lastFacingAngle = Math.atan2(moveY, moveX) * (180 / Math.PI);
+        }
+
+        // turn player sprite around when moving
+        if (this.facingRight && (this.body.velocity.x < 0))
+        {
+            this.facingRight = false;
+
+            this.setTexture('player2');
+        }
+        else if (!this.facingRight && (this.body.velocity.x > 0))
+        {
+            this.facingRight = true;
+
+            this.setTexture('player');
         }
 
         // --- ATTACK INPUT ---
@@ -178,7 +203,7 @@ export class Player extends Phaser.GameObjects.Sprite {
 
         this.sword.x = sx;
         this.sword.y = sy;
-        this.sword.angle = currentAngle;
+        this.sword.angle = currentAngle + 90;
 
         if (this.attackElapsed >= this.attackDuration) {
             this.isAttacking = false;

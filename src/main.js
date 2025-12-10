@@ -4,6 +4,7 @@ import { Town } from './scenes/Town.js';
 import { HUD } from './scenes/HUD.js';
 import { GameOver } from './scenes/GameOver.js';
 import { Dungeon1 } from './scenes/Dungeon1.js';
+import { Dungeon2 } from './scenes/Dungeon2.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -24,7 +25,8 @@ const config = {
         Town,
         HUD,
         GameOver,
-        Dungeon1
+        Dungeon1,
+        Dungeon2
     ],
     scale: {
         mode: Phaser.Scale.FIT,

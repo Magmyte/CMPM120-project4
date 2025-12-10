@@ -16,6 +16,7 @@ export class Town extends Phaser.Scene {
 
         // --- SPRITES ---
         this.load.image('player', 'assets/kenney_tiny-dungeon/Tiles/tile_0098.png');
+        this.load.image('player2', 'assets/kenney_tiny-dungeon/Tiles/tile_0132.png');
         this.load.image('sword', 'assets/kenney_tiny-dungeon/Tiles/tile_0107.png');
 
         // === NPC SPRITES (EXACT spriteKey MATCH) ===
@@ -87,12 +88,16 @@ export class Town extends Phaser.Scene {
 
         this.activeTalkTarget = null;
 
+        this.dialogueFlag = false;
+
         this.physics.add.overlap(this.player, this.npcs, (player, npc) => {
             this.activeTalkTarget = npc;
+            if (!this.dialogueFlag) this.dialogueFlag = true;
         });
 
         this.physics.add.overlap(this.player, this.signs, (player, sign) => {
             this.activeTalkTarget = sign;
+            if (!this.dialogueFlag) this.dialogueFlag = true;
         });
 
         // --- PHYSICS & CAMERA ---
@@ -152,8 +157,10 @@ export class Town extends Phaser.Scene {
 
         this.isInDialogue = true;
         this.dialoguePanel.setVisible(true);
+        this.dialoguePanel.depth = 7;
         this.dialogueText.setText(text);
         this.dialogueText.setVisible(true);
+        this.dialogueText.depth = 7;
     }
 
     hideDialogue() {
@@ -262,6 +269,17 @@ export class Town extends Phaser.Scene {
     }
 
     update(time, delta) {
+        
+        // set active talk target to null after 300 ms of not overlapping
+        if (this.dialogueFlag && this.player.body.touching.none)
+        {
+            this.dialogueFlag = false;
+            this.time.delayedCall(300, () =>
+            {
+                this.activeTalkTarget = null;
+            });
+        }
+        
         if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
             if (this.isInDialogue) {
                 this.hideDialogue();

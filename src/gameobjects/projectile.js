@@ -9,17 +9,9 @@ export class Projectile extends Phaser.GameObjects.Sprite {
         
         this.velocity = velocity;
         this.body.setVelocity(this.velocity * Math.cos(Phaser.Math.DegToRad(this.direction)), this.velocity * Math.sin(Phaser.Math.DegToRad(this.direction)));
-
-        this.startTime = this.scene.time.now;
-        this.duration = duration;
     }
 
     preUpdate(time, dTime) {
 
-        // destroy at end of duration
-        if (time - this.scene.time.now > this.duration)
-        {
-            this.destroy(true);
-        }
     }
 }

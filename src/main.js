@@ -1,26 +1,35 @@
-import { Start } from './scenes/Start.js';
+// src/main.js
+import { Menu } from './scenes/Menu.js';
+import { Town } from './scenes/Town.js';
+import { HUD } from './scenes/HUD.js';
+import { GameOver } from './scenes/GameOver.js';
+import { Dungeon1 } from './scenes/Dungeon1.js';
 
 const config = {
     type: Phaser.AUTO,
     title: 'CMPM 120 - Project 4: Grunkle\'s Adventure',
-    description: '',
     parent: 'game-container',
     width: 1280,
     height: 720,
     backgroundColor: '#000000',
     physics: {
         default: 'arcade',
-        debug: true
+        arcade: {
+            debug: false
+        }
     },
     pixelArt: true,
     scene: [
-        Start
+        Menu,      // start here
+        Town,
+        HUD,
+        GameOver,
+        Dungeon1
     ],
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
-    },
-}
+    }
+};
 
 new Phaser.Game(config);
-            

@@ -65,26 +65,26 @@
          "y":0
         }, 
         {
-         "data":[109, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 285, 112, 113, 285, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 111,
-            121, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 297, 124, 125, 297, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 123,
-            324, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 322,
-            324, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 107, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 322,
-            324, 0, 0, 0, 49, 50, 51, 52, 0, 0, 49, 50, 51, 52, 0, 53, 54, 55, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 53, 54, 55, 56, 0, 49, 50, 51, 52, 0, 49, 50, 51, 52, 0, 322,
-            324, 0, 0, 5, 61, 62, 63, 64, 0, 0, 61, 62, 63, 64, 0, 65, 66, 67, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 65, 66, 67, 68, 0, 61, 62, 63, 64, 0, 61, 62, 63, 64, 0, 322,
-            324, 0, 0, 17, 73, 85, 86, 76, 0, 0, 73, 85, 86, 85, 0, 77, 78, 90, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 77, 78, 90, 80, 0, 73, 85, 86, 76, 0, 73, 85, 86, 85, 0, 322,
-            324, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 322,
+         "data":[109, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 153, 112, 113, 153, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 111,
+            121, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 165, 124, 125, 165, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 122, 123,
+            192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 190,
+            192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 107, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 190,
+            192, 0, 0, 0, 49, 50, 51, 52, 0, 0, 49, 50, 51, 52, 0, 53, 54, 55, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 53, 54, 55, 56, 0, 49, 50, 51, 52, 0, 49, 50, 51, 52, 0, 190,
+            192, 0, 0, 5, 61, 62, 63, 64, 0, 0, 61, 62, 63, 64, 0, 65, 66, 67, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 65, 66, 67, 68, 0, 61, 62, 63, 64, 0, 61, 62, 63, 64, 0, 190,
+            192, 0, 0, 17, 73, 85, 86, 76, 0, 0, 73, 85, 86, 85, 0, 77, 78, 90, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 77, 78, 90, 80, 0, 73, 85, 86, 76, 0, 73, 85, 86, 85, 0, 190,
+            192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 190,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            324, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 322,
-            324, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 45, 46, 46, 70, 0, 70, 46, 46, 47, 0, 5, 0, 53, 54, 55, 56, 0, 0, 49, 50, 51, 52, 0, 0, 53, 54, 55, 56, 0, 322,
-            324, 0, 0, 0, 0, 108, 49, 50, 51, 52, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 57, 96, 0, 0, 0, 0, 0, 0, 59, 0, 17, 0, 65, 66, 67, 68, 0, 0, 61, 62, 63, 64, 0, 0, 65, 66, 67, 68, 0, 322,
-            324, 0, 339, 382, 0, 58, 61, 62, 63, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 77, 78, 90, 80, 0, 0, 73, 85, 86, 76, 0, 0, 85, 78, 90, 80, 0, 322,
-            324, 132, 0, 0, 0, 0, 73, 85, 86, 76, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 322,
-            324, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 57, 96, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 322,
-            324, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 69, 46, 46, 46, 46, 46, 46, 46, 71, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 322,
-            324, 305, 305, 305, 305, 305, 305, 17, 305, 305, 305, 305, 305, 305, 305, 305, 305, 17, 305, 305, 305, 305, 305, 305, 305, 305, 305, 305, 305, 305, 305, 305, 305, 305, 305, 17, 305, 305, 305, 305, 305, 305, 305, 17, 305, 305, 305, 305, 305, 322],
+            192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 190,
+            192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 45, 46, 46, 0, 0, 0, 46, 46, 47, 0, 5, 0, 53, 54, 55, 56, 0, 0, 49, 50, 51, 52, 0, 0, 53, 54, 55, 56, 0, 190,
+            192, 0, 0, 0, 0, 108, 49, 50, 51, 52, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 57, 96, 0, 0, 0, 0, 0, 0, 59, 0, 17, 0, 65, 66, 67, 68, 0, 0, 61, 62, 63, 64, 0, 0, 65, 66, 67, 68, 0, 190,
+            192, 222, 250, 207, 0, 58, 61, 62, 63, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 77, 78, 90, 80, 0, 0, 73, 85, 86, 76, 0, 0, 85, 78, 90, 80, 0, 190,
+            192, 132, 0, 0, 0, 0, 73, 85, 86, 76, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 190,
+            192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 57, 96, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 190,
+            192, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 69, 46, 46, 46, 46, 46, 46, 46, 71, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 190,
+            192, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 173, 190],
          "height":20,
          "id":2,
          "name":"Decorations\/Buildings",
@@ -105,6 +105,12 @@
                  "height":16,
                  "id":1,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"<--- Ancient Graveyard\""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -117,6 +123,12 @@
                  "height":16,
                  "id":2,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"V--- Blacksmith"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -129,6 +141,12 @@
                  "height":16,
                  "id":3,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\" --->\""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -137,76 +155,22 @@
                  "y":204.428
                 }, 
                 {
-                 "gid":365,
+                 "gid":248,
                  "height":16,
-                 "id":35,
+                 "id":46,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"Potions for sale! ---->\""
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":750.465,
-                 "y":276.346
-                }, 
-                {
-                 "gid":380,
-                 "height":16,
-                 "id":36,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":719.734,
-                 "y":254.168
-                }, 
-                {
-                 "gid":377,
-                 "height":16,
-                 "id":37,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":559.106,
-                 "y":133.46
-                }, 
-                {
-                 "gid":389,
-                 "height":16,
-                 "id":38,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":687.101,
-                 "y":114.134
-                }, 
-                {
-                 "gid":362,
-                 "height":16,
-                 "id":39,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":351.907,
-                 "y":46.3351
-                }, 
-                {
-                 "gid":362,
-                 "height":16,
-                 "id":40,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":399.429,
-                 "y":46.9688
+                 "x":686.784361728248,
+                 "y":257.336
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -220,40 +184,234 @@
          "name":"NPCs",
          "objects":[
                 {
-                 "gid":352,
+                 "gid":233,
                  "height":16,
-                 "id":31,
+                 "id":45,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"With all the commotion lately, I had to drop my potions to get back to safety! If you see them, feel free to use the potions however you need, deary.\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"oldlady"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":41.4238,
-                 "y":277.296
+                 "x":766.623,
+                 "y":273.178
                 }, 
                 {
-                 "gid":364,
+                 "gid":220,
                  "height":16,
-                 "id":32,
+                 "id":47,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"How's that sword treating you? One of the finest I've made, should cut down any foe that stands in your way! Good luck defeating the evil wizard! Go get 'em, Grunkle!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"blacksmith"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":47.4433,
+                 "y":271.277
+                }, 
+                {
+                 "gid":257,
+                 "height":16,
+                 "id":48,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"Shhh! I'm hiding from the cats! If you spot Mona or her brother Loki, you never saw me!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"rat"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":688.052,
+                 "y":112.867
+                }, 
+                {
+                 "gid":218,
+                 "height":16,
+                 "id":49,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"I hope you can defeat the evil wizard. We're counting on you, Grunkle!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"townman"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
                  "x":126.648,
-                 "y":128.708
+                 "y":128.074
                 }, 
                 {
-                 "gid":353,
+                 "gid":232,
                  "height":16,
-                 "id":33,
+                 "id":50,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"With that sword you have, you are looking like a proper knight! Good luck, Grunkle!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"townlady"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":416.221,
-                 "y":207.913
+                 "x":255.277,
+                 "y":202.844
+                }, 
+                {
+                 "gid":219,
+                 "height":16,
+                 "id":51,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"Ever since the evil wizard took over, traders avoid this town like the plague. My stores are almost depleted. Any longer, and we'll all starve! You have to do something, Grunkle!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"grocer"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":526.791,
+                 "y":270.643
+                }, 
+                {
+                 "gid":230,
+                 "height":16,
+                 "id":52,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"If you're off to fight the evil wizard, make sure you have the key to the castle! There's a spare, hidden in the graveyard to the west. Watch out for ghosts!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"guard1"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":339.867691972595,
+                 "y":47.2856
+                }, 
+                {
+                 "gid":229,
+                 "height":16,
+                 "id":53,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"That sword is pretty handy. You might want something with a little more punch though! I left my battle axe to the east. If you find it, it's yours. No way am I going over there!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"guard2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":412.418861114411,
+                 "y":47.6024191358758
+                }, 
+                {
+                 "gid":221,
+                 "height":16,
+                 "id":54,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"I've trained you well. You're ready to begin your quest! First, you need the key to the wizard's lair. Seek it to the West, in the ancient graveyard. Beware of ghosts!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"trainer"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":416.538,
+                 "y":207.279
+                }, 
+                {
+                 "gid":245,
+                 "height":16,
+                 "id":55,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialogue",
+                         "type":"string",
+                         "value":"\"Business has been slow since the evil wizard took over. All the monsters have ran off the animals!\""
+                        }, 
+                        {
+                         "name":"spriteKey",
+                         "type":"string",
+                         "value":"ranger"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":607.896,
+                 "y":130.926
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -264,55 +422,81 @@
         {
          "draworder":"topdown",
          "id":6,
-         "name":"Spawn Points",
+         "name":"Portals",
          "objects":[
                 {
                  "height":0,
-                 "id":15,
+                 "id":58,
                  "name":"",
-                 "point":true,
+                 "properties":[
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"Dungeon1"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":383.985,
-                 "y":45.622
+                 "x":10.7719,
+                 "y":157.776
                 }, 
                 {
                  "height":0,
-                 "id":16,
+                 "id":59,
                  "name":"",
-                 "point":true,
+                 "properties":[
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"Dungeon2"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":9.82139,
-                 "y":160.627
+                 "x":788.563,
+                 "y":159.677
                 }, 
                 {
                  "height":0,
-                 "id":17,
+                 "id":60,
                  "name":"",
-                 "point":true,
+                 "properties":[
+                        {
+                         "name":"targetScene",
+                         "type":"string",
+                         "value":"BossArena"
+                        }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":789.83,
-                 "y":159.994
-                }, 
+                 "x":383.668,
+                 "y":26.296
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":8,
+         "name":"PlayerSpawn",
+         "objects":[
                 {
                  "height":0,
-                 "id":18,
+                 "id":57,
                  "name":"",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":390.321,
-                 "y":259.158
+                 "x":391.588,
+                 "y":252.505
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -320,8 +504,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":41,
+ "nextlayerid":9,
+ "nextobjectid":61,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -343,19 +527,6 @@
         {
          "columns":12,
          "firstgid":133,
-         "image":"..\/CMPM120-project4-main\/assets\/kenney_tiny-dungeon\/Tilemap\/tilemap_packed.png",
-         "imageheight":176,
-         "imagewidth":192,
-         "margin":0,
-         "name":"Dungeon",
-         "spacing":0,
-         "tilecount":132,
-         "tileheight":16,
-         "tilewidth":16
-        }, 
-        {
-         "columns":12,
-         "firstgid":265,
          "image":"..\/kenney_tiny-dungeon\/Tilemap\/tilemap_packed.png",
          "imageheight":176,
          "imagewidth":192,

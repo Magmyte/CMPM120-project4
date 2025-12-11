@@ -49,6 +49,67 @@ export class Boss extends Phaser.GameObjects.Sprite {
         this.knockbackDuration = 250;  // how long to retreat after a hit
         this.knockbackSpeed    = 140;  // retreat speed
         this.knockbackAngle    = 0;    // direction away from player
+
+        // adding chatter
+        this.bantering = false;
+        this.banterDelay = 8000;
+        this.lastBanter = this.scene.time.now;
+
+        this.banterArr = [
+            "Die, die, DIE!",
+            "Why won't you die?!",
+            "The die has been cast...",
+            "There is no escape for you now...",
+            "You could have left a long time ago...",
+            "I will make you suffer!",
+            "You have no future left!",
+            "I will wipe you from the face of this Earth!",
+            "There is no Weezurd like me!",
+            "Give it up, Grunkle!",
+            "None hath fury like ME!",
+            "You will rue the day you crossed me!",
+            "No one will remember your name...",
+            "Surrender, and I'll make your death painless...",
+            "Death is close...",
+            "You have already lost!",
+            "Hope is an illusion!",
+            "Flee and cower!",
+            "Give into your fear...",
+            "I will break you!",
+            "Death is eternal!",
+            "Bow your head before me!",
+            "Know your place, insect!",
+            "Die, insect!",
+            "I will destroy all!",
+            "Your destiny ends here!",
+            "Your fate ends here!",
+            "Your story ends here!",
+            "Your adventure ends here!",
+            "Meet the end of your days!",
+            "I can taste your fear!",
+            "I'll put you into the ground!",
+            "None shall stop my rise!",
+            "You can't stop me! No one can!",
+            "Trifling adventurer!",
+            "This will be your undoing!",
+            "Oblivion awaits you!",
+            "I will crush you!",
+            "You are not prepared!",
+            "Have at you!",
+            "None can oppose me!",
+            "This will be your end!",
+
+            "Oww, I bith my thongue.",
+            "No, I don't offer dental!",
+            "Could we schedule again? I'm busy today.",
+            "...And a happy new year!",
+            "I can smell you...",
+            "Almost Christmas means it wasn't Christmas!",
+            "People die when they are killed!",
+            "You only have 3-5 business days left!",
+            "Who were you again?",
+            "Mondays through Fridays, except holidays."
+        ];
     }
 
     // Called by the scene when the boss has just hit the player up close
@@ -105,6 +166,15 @@ export class Boss extends Phaser.GameObjects.Sprite {
             if (distToPlayer <= this.activationRadius) {
                 this.awake = true;
                 console.log('[Boss] Awakens!');
+
+                this.yell("I always knew this day would come, Grunkle.");
+
+                this.scene.time.delayedCall(3000, () =>
+                {
+                    this.yell("Prepare to DIE!");
+                    this.bantering = true;
+                    this.lastBanter = this.scene.time.now;
+                });
             } else {
                 this.body.setVelocity(0, 0);
                 return;
@@ -159,6 +229,12 @@ export class Boss extends Phaser.GameObjects.Sprite {
             // PHASE 3: kite + shoot
             this.handlePhase3Movement(distToPlayer, angleToPlayer, delta);
             this.handlePhase3Shooting(distToPlayer, angleToPlayer, delta);
+        }
+
+        // banter with player
+        if (this.bantering && time - this.lastBanter > this.banterDelay) {
+            this.lastBanter = time;
+            this.yell(this.banterArr[Math.floor(Math.random()*this.banterArr.length)]);
         }
     }
 
@@ -243,6 +319,25 @@ export class Boss extends Phaser.GameObjects.Sprite {
             scene.scene.stop('HUD');
             scene.scene.start('Victory');
         });
+        this.bantering = false;
         this.destroy();
+    }
+
+    yell(message) {
+        this.banter = this.scene.add.text(
+            this.x - 150,
+            this.y - 30,
+            message,
+            {
+                fontFamily: 'sans-serif',
+                fontSize: 14,
+                wordWrap: { width: 400 },
+                align: 'center'
+            });
+
+        this.scene.time.delayedCall(3000, () =>
+        {
+            this.banter.destroy(true);
+        });
     }
 }

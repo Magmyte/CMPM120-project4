@@ -56,7 +56,7 @@ export class Player extends Phaser.GameObjects.Sprite {
         // sword as a physics sprite (hitbox)
         this.sword = this.scene.physics.add.sprite(this.x, this.y, 'sword');
 
-        if (this.registry.get('hasAxe') === true) this.sword.setTexture('axe');
+        if (this.scene.registry.get('hasAxe') === true) this.sword.setTexture('axe');
 
         this.sword.setOrigin(0.5, 0.5);
         this.sword.body.setAllowGravity(false);

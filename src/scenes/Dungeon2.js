@@ -58,6 +58,10 @@ export class Dungeon2 extends Phaser.Scene {
         // AXE STATE
         this.hasAxe = this.registry.get('hasAxe') === true;  // persistent across scenes - false means player does not have axe
 
+        // PUZZlE STATES
+        this.puzzle1Solved = this.registry.get('puzzle1Solved') === true;
+        this.puzzle2Solved = this.registry.get('puzzle2Solved') === true;
+
         // draw interactive objects
         this.interactives = this.map.getObjectLayer("Interactives");
         if (this.interactives)
@@ -94,6 +98,9 @@ export class Dungeon2 extends Phaser.Scene {
                         else if (obj.properties[0].value == 'gate1' || obj.properties[0].value == 'gate2')
                         {
                             this.gates.add(interactiveObject);
+
+                            if (this.puzzle1Solved && interactiveObject.effect == 'gate1') interactiveObject.destroy(true);
+                            if (this.puzzle2Solved && interactiveObject.effect == 'gate2') interactiveObject.destroy(true);
                         }
 
                         // add resets to resets group
@@ -242,6 +249,8 @@ export class Dungeon2 extends Phaser.Scene {
         // open gates
         if (this.button1Press && this.button2Press)
         {
+            this.registry.set('puzzle1Solved', true);
+
             this.gates.children.each( function(obj) {
                 if (obj.effect == 'gate1')
                 {
@@ -252,6 +261,8 @@ export class Dungeon2 extends Phaser.Scene {
 
         if (this.button3Press && this.button4Press)
         {
+            this.registry.set('puzzle2Solved', true);
+
             this.gates.children.each( function(obj) {
                 if (obj.effect == 'gate2')
                 {
@@ -287,6 +298,7 @@ export class Dungeon2 extends Phaser.Scene {
 
         // Store axe in registry
         this.registry.set('hasAxe', true);
+        this.player.sword.setTexture('axe');
 
         // display reward text
         this.showRewardText(

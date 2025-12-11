@@ -176,7 +176,8 @@ export class BossArena extends Phaser.Scene {
                 this.boss,
                 (sword, boss) => {
                     if (boss && boss.takeDamage) {
-                        boss.takeDamage(1);
+                        if (this.registry.get('hasAxe') === true) boss.takeDamage(2);
+                        else boss.takeDamage(1);
                     }
                 },
                 null,

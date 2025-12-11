@@ -46,8 +46,41 @@ export class Enemy extends Phaser.GameObjects.Sprite {
 
     takeDamage(amount = 1) {
         this.health -= amount;
+
         if (this.health <= 0) {
-            // TODO: add death animation / particles later
+            const scene = this.scene;
+            const x = this.x;
+            const y = this.y;
+
+            // --- PARTICLE EFFECT (ghost poof on death) ---
+            if (scene.textures.exists('ghost_poof')) {
+                const emitter = scene.add.particles(x, y, 'ghost_poof', {
+                    speed: { min: -10, max: 10 },        // much slower, stays tight
+                    scale: { start: 0.05, end: 0 },        // VERY small particles (ghost is ~16x16)
+                    alpha: { start: 1, end: 0 },
+                    lifespan: 300,
+                    quantity: 3,                          // half the particles
+                    angle: { min: 0, max: 360 },
+                    rotate: { min: 0, max: 180 },
+                    blendMode: 'ADD'
+                });
+
+                // Destroy the emitter after a short time so it doesn't hang around
+                scene.time.delayedCall(500, () => {
+                    emitter.destroy();
+                });
+            } else {
+                console.warn('ghost_poof texture is not loaded; skipping ghost poof particles.');
+            }
+
+            // --- SOUND EFFECT ---
+            if (scene.sound) {
+                scene.sound.play('ghost_flee', {
+                    volume: 0.6
+                });
+            }
+
+            // Remove the ghost sprite
             this.destroy();
         }
     }

@@ -1,3 +1,4 @@
+// src/gameobjects/Player.js
 export class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
@@ -6,7 +7,9 @@ export class Player extends Phaser.GameObjects.Sprite {
 
         this.scene = scene;
 
-        // player variables
+
+        // Player movement variables
+
         this.velocityMaxX = 100;
         this.velocityMaxY = 100;
 
@@ -19,149 +22,172 @@ export class Player extends Phaser.GameObjects.Sprite {
         this.body.maxVelocity.set(this.velocityMaxX, this.velocityMaxY);
         this.body.setDrag(this.decelerationX, this.decelerationY);
 
-        // controls
-        this.keyW = this.scene.input.keyboard.addKey("W", false, true);
-        this.keyA = this.scene.input.keyboard.addKey("A", false, true);
-        this.keyS = this.scene.input.keyboard.addKey("S", false, true);
-        this.keyD = this.scene.input.keyboard.addKey("D", false, true);
 
-        this.up    = this.scene.input.keyboard.addKey("UP", false, true);
-        this.left  = this.scene.input.keyboard.addKey("LEFT", false, true);
-        this.down  = this.scene.input.keyboard.addKey("DOWN", false, true);
-        this.right = this.scene.input.keyboard.addKey("RIGHT", false, true);
+        // Movement keys
 
-        this.space = this.scene.input.keyboard.addKey("SPACE", false, false);
+        this.keyW = this.scene.input.keyboard.addKey("W");
+        this.keyA = this.scene.input.keyboard.addKey("A");
+        this.keyS = this.scene.input.keyboard.addKey("S");
+        this.keyD = this.scene.input.keyboard.addKey("D");
+
+        this.up    = this.scene.input.keyboard.addKey("UP");
+        this.left  = this.scene.input.keyboard.addKey("LEFT");
+        this.down  = this.scene.input.keyboard.addKey("DOWN");
+        this.right = this.scene.input.keyboard.addKey("RIGHT");
+
+        this.space = this.scene.input.keyboard.addKey("SPACE");
         this.spaceWasDown = false;
 
         this.facingRight = true;
 
-        // --- HEALTH ---
+        
+        // Health
+        
         this.maxHealth = 10;
         this.health = this.maxHealth;
         this.invulnerableUntil = 0;
 
-        // --- GOD MODE ---
+        
+        // GOD MODE
         this.godMode = false;
-        this.keyG = this.scene.input.keyboard.addKey(
-            Phaser.Input.Keyboard.KeyCodes.G
-        );
-        // let HUD know initial state
+        this.keyG = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         this.scene.registry.set('godMode', this.godMode);
 
-        // --- ATTACK / SWORD SETUP ---
-
-        // track last facing direction (degrees)
+        
+        // ATTACK SYSTEM
+        
         this.lastFacingAngle = 0;
 
-        // sword as a physics sprite (hitbox)
         this.sword = this.scene.physics.add.sprite(this.x, this.y, 'sword');
 
-        if (this.scene.registry.get('hasAxe') === true) this.sword.setTexture('axe');
+        if (this.scene.registry.get('hasAxe') === true) {
+            this.sword.setTexture('axe');
+        }
 
-        this.sword.setOrigin(0.5, 0.5);
+        this.sword.setOrigin(0.5);
         this.sword.body.setAllowGravity(false);
-        this.sword.body.setCircle(6);   // small circular hitbox
-        this.sword.body.enable = false; // off by default
+        this.sword.body.setCircle(6);
+        this.sword.body.enable = false;
         this.sword.setVisible(false);
 
         this.setDepth(5);
         this.sword.setDepth(6);
 
-        // attack state
+        // Sound effects
+        this.sfxSlash = this.scene.sound.get('sfx_slash') || this.scene.sound.add('sfx_slash');
+        this.sfxSpin  = this.scene.sound.get('sfx_spin')  || this.scene.sound.add('sfx_spin');
+
         this.isAttacking = false;
         this.attackElapsed = 0;
         this.attackDuration = 200;
         this.attackStartAngle = 0;
         this.attackEndAngle = 0;
         this.swordRadius = 18;
-        this.attackType = null; // 'slash' or 'spin'
+        this.attackType = null;
+
+        
+        // STEP DUST PARTICLES
+        
+        this.stepEmitter = scene.add.particles(0, 0, 'step_dust', {
+            speed: { min: 10, max: 25 },
+            lifespan: { min: 180, max: 260 },
+            scale: { start: 0.03, end: 0 },
+            alpha: { start: 0.6, end: 0 },
+            quantity: 1,
+            emitting: false,
+            rotate: { min: 0, max: 360 },
+            gravityY: 0
+        });
+        this.stepEmitter.setDepth(1);
+    }
+
+    // Emit small dust puff behind player
+    emitStepDust(moveX, moveY) {
+        if (!this.stepEmitter) return;
+        const len = Math.hypot(moveX, moveY) || 1;
+        const dirX = moveX / len;
+        const dirY = moveY / len;
+
+        const offsetDist = 6;
+        const px = this.x - dirX * offsetDist;
+        const py = this.y - dirY * offsetDist;
+
+        this.stepEmitter.emitParticleAt(px, py, 1);
     }
 
     preUpdate(time, dTime) {
         super.preUpdate(time, dTime);
 
-        // --- MOVEMENT ---
+        
+        // MOVEMENT LOGIC
+        
         let moveX = 0;
         if (this.keyA.isDown || this.left.isDown) moveX--;
         if (this.keyD.isDown || this.right.isDown) moveX++;
-
-        if (moveX !== 0) {
-            this.body.setAccelerationX(moveX * this.accelerationX);
-        } else {
-            this.body.setAccelerationX(0);
-        }
 
         let moveY = 0;
         if (this.keyW.isDown || this.up.isDown) moveY--;
         if (this.keyS.isDown || this.down.isDown) moveY++;
 
-        if (moveY !== 0) {
-            this.body.setAccelerationY(moveY * this.accelerationY);
-        } else {
-            this.body.setAccelerationY(0);
+        if (moveX !== 0) this.body.setAccelerationX(moveX * this.accelerationX);
+        else this.body.setAccelerationX(0);
+
+        if (moveY !== 0) this.body.setAccelerationY(moveY * this.accelerationY);
+        else this.body.setAccelerationY(0);
+
+        // Damp diagonal movement
+        const diag = Math.hypot(this.body.velocity.x, this.body.velocity.y);
+        if (diag > this.velocityMaxX) {
+            this.body.setVelocityX(this.body.velocity.x * this.velocityMaxX / diag);
+            this.body.setVelocityY(this.body.velocity.y * this.velocityMaxX / diag);
         }
 
-        // cap diagonal movement
-        let diagonalMove = Math.sqrt(this.body.velocity.x ** 2 + this.body.velocity.y ** 2);
-        if (diagonalMove > this.maxVelocityX)
-        {
-            this.body.setVelocityX(this.body.velocity.x * this.maxVelocityX / diagonalMove);
-            this.body.setVelocityY(this.body.velocity.y * this.maxVelocityX / diagonalMove);
-        }
-
-        // update facing direction if moving
-        if (moveX !== 0 || moveY !== 0) {
-            this.lastFacingAngle = Math.atan2(moveY, moveX) * (180 / Math.PI);
-        }
-
-        // turn player sprite around when moving
-        if (this.facingRight && (this.body.velocity.x < 0))
-        {
+        // Face correct direction
+        if (this.facingRight && this.body.velocity.x < 0) {
             this.facingRight = false;
-
             this.setTexture('player2');
-        }
-        else if (!this.facingRight && (this.body.velocity.x > 0))
-        {
+        } else if (!this.facingRight && this.body.velocity.x > 0) {
             this.facingRight = true;
-
             this.setTexture('player');
         }
 
-        // --- ATTACK INPUT ---
+        // Update facing direction
+        if (moveX !== 0 || moveY !== 0) {
+            this.lastFacingAngle = Math.atan2(moveY, moveX) * (180 / Math.PI);
+            this.emitStepDust(moveX, moveY);
+        }
+
+        // ATTACK INPUT      
         const spaceJustPressed = this.space.isDown && !this.spaceWasDown;
         this.spaceWasDown = this.space.isDown;
 
         if (spaceJustPressed && !this.isAttacking) {
-            if (moveX !== 0 || moveY !== 0) {
-                this.startSlashAttack();
-            } else {
-                this.startSpinAttack();
-            }
+            if (moveX !== 0 || moveY !== 0) this.startSlashAttack();
+            else this.startSpinAttack();
         }
 
-        // --- GOD MODE TOGGLE (G key) ---
+        // GOD MODE TOGGLE
         if (Phaser.Input.Keyboard.JustDown(this.keyG)) {
             this.godMode = !this.godMode;
             this.scene.registry.set('godMode', this.godMode);
 
             console.log(this.godMode ? 'GOD MODE ENABLED' : 'GOD MODE DISABLED');
 
-            if (this.godMode) {
-                this.setTint(0x00ffff);   // cyan tint to show it's on
-            } else {
-                this.clearTint();
-            }
+            if (this.godMode) this.setTint(0x00ffff);
+            else this.clearTint();
         }
 
-        // --- UPDATE ACTIVE ATTACK ---
-        if (this.isAttacking) {
-            this.updateAttack(dTime);
-        } else {
+        // UPDATE ACTIVE ATTACK
+
+        if (this.isAttacking) this.updateAttack(dTime);
+        else {
             this.sword.setVisible(false);
             this.sword.body.enable = false;
         }
     }
+
+
+    // SLASH ATTACK (moving)
 
     startSlashAttack() {
         this.isAttacking = true;
@@ -175,7 +201,12 @@ export class Player extends Phaser.GameObjects.Sprite {
 
         this.sword.setVisible(true);
         this.sword.body.enable = true;
+
+        if (this.sfxSlash) this.sfxSlash.play({ volume: 0.7 });
     }
+
+
+    // SPIN ATTACK (standing)
 
     startSpinAttack() {
         this.isAttacking = true;
@@ -188,19 +219,20 @@ export class Player extends Phaser.GameObjects.Sprite {
 
         this.sword.setVisible(true);
         this.sword.body.enable = true;
+
+        if (this.sfxSpin) this.sfxSpin.play({ volume: 0.8 });
     }
 
     updateAttack(dTime) {
         this.attackElapsed += dTime;
-        let t = this.attackElapsed / this.attackDuration;
-        if (t > 1) t = 1;
+        let t = Math.min(this.attackElapsed / this.attackDuration, 1);
 
-        let currentAngle = this.attackStartAngle +
+        const currentAngle =
+            this.attackStartAngle +
             (this.attackEndAngle - this.attackStartAngle) * t;
 
         const rad = currentAngle * (Math.PI / 180);
 
-        // position sword hitbox around player
         const sx = this.x + Math.cos(rad) * this.swordRadius;
         const sy = this.y + Math.sin(rad) * this.swordRadius;
 
@@ -208,36 +240,29 @@ export class Player extends Phaser.GameObjects.Sprite {
         this.sword.y = sy;
         this.sword.angle = currentAngle + 90;
 
-        if (this.attackElapsed >= this.attackDuration) {
+        if (t >= 1) {
             this.isAttacking = false;
             this.sword.setVisible(false);
             this.sword.body.enable = false;
         }
     }
 
-    takeDamage(amount = 1, source = null) {
-        const now = this.scene.time.now || 0;
 
-        // ✅ GOD MODE: ignore all damage
-        if (this.godMode) {
-            console.log('God Mode active — no damage taken');
-            return;
-        }
+    // DAMAGE HANDLING
+ 
+    takeDamage(amount = 1) {
+        const now = this.scene.time.now;
 
-        // brief invulnerability window
+        if (this.godMode) return;
         if (now < this.invulnerableUntil) return;
 
         this.health = Math.max(0, this.health - amount);
-        this.invulnerableUntil = now + 1000; // 1 second
+        this.invulnerableUntil = now + 1000;
 
-        // simple feedback
         this.setTintFill(0xff4444);
         this.scene.time.delayedCall(150, () => this.clearTint());
 
-        console.log(`Player hit! Health = ${this.health}`);
-
         if (this.health <= 0) {
-            console.log('Player died → going to GameOver scene');
             this.scene.scene.start('GameOver');
         }
     }

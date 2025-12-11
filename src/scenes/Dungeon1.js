@@ -67,6 +67,7 @@ export class Dungeon1 extends Phaser.Scene {
             this.scene.launch('HUD');
         }
         this.scene.bringToTop('HUD');
+        this.game.events.emit('player-created', this.player);
 
         //KEY / CHEST STATE
         this.hasKey = this.registry.get('hasKey') === true;  // persistent across scenes

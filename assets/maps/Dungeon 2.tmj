@@ -530,6 +530,78 @@
                  "width":16,
                  "x":288,
                  "y":240
+                }, 
+                {
+                 "gid":78,
+                 "height":16,
+                 "id":28,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"operation",
+                         "type":"string",
+                         "value":"gate2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":32,
+                 "y":336
+                }, 
+                {
+                 "gid":78,
+                 "height":16,
+                 "id":29,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"operation",
+                         "type":"string",
+                         "value":"gate2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":48,
+                 "y":336
+                }, 
+                {
+                 "gid":78,
+                 "height":16,
+                 "id":30,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"operation",
+                         "type":"string",
+                         "value":"gate2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":32,
+                 "y":384
+                }, 
+                {
+                 "gid":78,
+                 "height":16,
+                 "id":31,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"operation",
+                         "type":"string",
+                         "value":"gate2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":48,
+                 "y":384
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -538,7 +610,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":28,
+ "nextobjectid":32,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

@@ -1,5 +1,5 @@
 // src/scenes/mapUtils.js
-import { Player } from '../gameobjects/player.js';
+import { Player } from '../gameobjects/Player.js';
 
 export function setupTilemap(scene, mapKey, tilesetConfig) {
     const map = scene.make.tilemap({ key: mapKey });

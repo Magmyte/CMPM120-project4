@@ -9,6 +9,9 @@ export class Dungeon2 extends Phaser.Scene {
 
     preload() {
 
+        // map asset
+        this.load.tilemapTiledJSON('dungeon2Map', 'assets/maps/Dungeon 2.tmj');
+
         // tileset asset
         this.load.image('tinyDungeonTilesPacked', 'assets/kenney_tiny-dungeon/Tilemap/tilemap_packed.png');
 
@@ -135,6 +138,7 @@ export class Dungeon2 extends Phaser.Scene {
             this.scene.launch('HUD');
         }
         this.scene.bringToTop('HUD');
+        this.game.events.emit('player-created', this.player);
 
         // initialize variables
         this.puzzleResetDelay = 2000;
@@ -157,6 +161,33 @@ export class Dungeon2 extends Phaser.Scene {
 
         this.physics.add.collider(this.walls, this.pushables);
         this.physics.add.collider(this.pushables, this.pushables);
+
+        // puzzle resetter
+        if (this.player.sword)
+        {
+            this.physics.add.overlap(this.resets, this.player.sword, (resets, sword) =>
+            {
+                if (!this.puzzleReset)
+                {
+                    switch (resets.effect) {
+                        case 'reset1':
+                            this.resetPuzzle(1);
+                            break;
+                        case 'reset2':
+                            this.resetPuzzle(2);
+                            break;
+                        default:
+                            console.log('Something with the puzzle resetter broke.');
+                    }
+                }
+            });
+        }
+
+        // axe upgrade overlap check
+        this.physics.add.overlap(this.player, this.axe, (player, axe) =>
+        {
+            this.axePickUp(player, axe);
+        });
 
         // initialize camera
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
@@ -222,16 +253,6 @@ export class Dungeon2 extends Phaser.Scene {
             }, this);
         }
 
-        // puzzle resetter - TODO
-        // this.physics.world.overlap(this.resets, this.playerProjectiles, (resets, projectile) = > {});
-
-        // axe upgrade overlap check - TODO
-        this.physics.world.overlap(this.player, this.axe, (player, axe) =>
-            {
-                axePickUp(player);
-                axe.destroy(true);
-            });
-
         // check for overlap with buttons
         this.physics.world.overlap(this.pushables, this.buttons, (pushable, button) =>
         {
@@ -255,12 +276,21 @@ export class Dungeon2 extends Phaser.Scene {
     }
 
     // increase player's damage
-    axePickUp(player) {
+    axePickUp(player, axe) {
 
         // display reward text
         this.showRewardText(
             "You have found an axe! Your damage has increased."
         );
+
+        this.tweens.add({
+            targets: axe,
+            y: axe.y - 24,
+            alpha: 0,
+            duration: 900,
+            ease: 'Sine.easeOut',
+            onComplete: () => axe.destroy()
+        });
     }
 
     setupPortals(map) {
@@ -331,8 +361,10 @@ export class Dungeon2 extends Phaser.Scene {
     }
 
     showRewardText(message) {
+        this.rewardPanel.depth = 7;
         this.rewardPanel.setVisible(true);
         this.rewardText.setText(message);
+        this.rewardText.depth = 8;
         this.rewardText.setVisible(true);
 
         // Auto-hide after a short time
@@ -346,8 +378,8 @@ export class Dungeon2 extends Phaser.Scene {
         this.rewardText.setVisible(false);
     }
 
-    // resetting puzzle 1
-    resetPuzzle1() {
+    // resetting puzzle function
+    resetPuzzle(num) {
 
         // change flag for puzzle resetting
         this.puzzleReset = true;
@@ -357,9 +389,11 @@ export class Dungeon2 extends Phaser.Scene {
             this.puzzleReset = false;
         });
 
+        var checker = 'barrel' + num;
+
         // destroy barrels
         this.pushables.children.each( function(obj) {
-            if (obj.effect == 'barrel1')
+            if (obj.effect == checker)
             {
                 obj.destroy(true);
             }
@@ -370,12 +404,13 @@ export class Dungeon2 extends Phaser.Scene {
         {
             if (obj.properties)
             {
-                if (obj.properties[0].name == "operation" && obj.properties[0].value == 'barrel1')
+                if (obj.properties[0].name == "operation" && obj.properties[0].value == checker)
                 {
                     let interactiveObject = this.physics.add.sprite(obj.x + 8, obj.y - 8, obj.properties[0].value);
                     interactiveObject.effect = obj.properties[0].value;
                     this.interactiveGroup.add(interactiveObject);
 
+                    interactiveObject.depth = 3;
                     interactiveObject.setPushable(true);
                     interactiveObject.body.setDrag(this.barrelDrag);
                     interactiveObject.body.setBounce(0);
@@ -385,50 +420,15 @@ export class Dungeon2 extends Phaser.Scene {
         }
 
         // change flags for buttons
-        this.button1Press = false;
-        this.button2Press = false;
-    }
-
-    // resetting puzzle 2
-    resetPuzzle2() {
-
-        // change flag for puzzle resetting
-        this.puzzleReset = true;
-
-        this.time.delayedCall(this.puzzleResetDelay, () =>
+        if (num == 1)
         {
-            this.puzzleReset = false;
-        });
-
-        // destroy barrels
-        this.pushables.children.each( function(obj) {
-            if (obj.effect == 'barrel2')
-            {
-                obj.destroy(true);
-            }
-        }, this);
-
-        // re-add barrels
-        for (var obj of this.interactives.objects)
-        {
-            if (obj.properties)
-            {
-                if (obj.properties[0].name == "operation" && obj.properties[0].value == 'barrel2')
-                {
-                    let interactiveObject = this.physics.add.sprite(obj.x + 8, obj.y - 8, obj.properties[0].value);
-                    interactiveObject.effect = obj.properties[0].value;
-                    this.interactiveGroup.add(interactiveObject);
-
-                    interactiveObject.setPushable(true);
-                    interactiveObject.body.setDrag(this.barrelDrag);
-                    interactiveObject.body.setBounce(0);
-                    this.pushables.add(interactiveObject);
-                }
-            }
+            this.button1Press = false;
+            this.button2Press = false;
         }
-
-        // change flags for buttons
-        this.button3Press = false;
-        this.button4Press = false;
+        else if (num == 2)
+        {
+            this.button3Press = false;
+            this.button4Press = false;
+        }
     }
 }

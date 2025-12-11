@@ -79,6 +79,8 @@ export class Town extends Phaser.Scene {
         }
         this.scene.bringToTop('HUD');
 
+        this.game.events.emit('player-created', this.player);
+        
         // --- NPCs & SIGNS ---
         this.npcs = this.physics.add.staticGroup();
         this.signs = this.physics.add.staticGroup();
@@ -288,4 +290,5 @@ export class Town extends Phaser.Scene {
             }
         }
     }
+}
 }

@@ -55,6 +55,9 @@ export class Dungeon2 extends Phaser.Scene {
 
         this.barrelDrag = 400;
 
+        // AXE STATE
+        this.hasAxe = this.registry.get('hasAxe') === true;  // persistent across scenes - false means player does not have axe
+
         // draw interactive objects
         this.interactives = this.map.getObjectLayer("Interactives");
         if (this.interactives)
@@ -103,6 +106,10 @@ export class Dungeon2 extends Phaser.Scene {
                         else if (obj.properties[0].value == 'axe')
                         {
                             this.axe = interactiveObject;
+                            if (this.hasAxe)
+                            {
+                                interactiveObject.destroy(true);
+                            }
                         }
                     }
                 }
@@ -278,11 +285,15 @@ export class Dungeon2 extends Phaser.Scene {
     // increase player's damage
     axePickUp(player, axe) {
 
+        // Store axe in registry
+        this.registry.set('hasAxe', true);
+
         // display reward text
         this.showRewardText(
             "You have found an axe! Your damage has increased."
         );
 
+        // animation
         this.tweens.add({
             targets: axe,
             y: axe.y - 24,

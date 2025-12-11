@@ -133,7 +133,8 @@ export class Dungeon1 extends Phaser.Scene {
                 this.enemies,
                 (sword, enemy) => {
                     if (enemy && typeof enemy.takeDamage === 'function') {
-                        enemy.takeDamage(1);
+                        if (this.registry.get('hasAxe') === true) enemy.takeDamage(2);
+                        else enemy.takeDamage(1);
                     }
                 },
                 null,

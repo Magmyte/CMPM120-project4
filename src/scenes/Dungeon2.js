@@ -1,5 +1,5 @@
-import { Player } from '../gameobjects/player.js';
-import { Enemy } from '../gameobjects/enemy.js';
+import { Player } from '../gameobjects/Player.js';
+import { Enemy } from '../gameobjects/Enemy.js';
 
 export class Dungeon2 extends Phaser.Scene {
 

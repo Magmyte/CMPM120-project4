@@ -1,5 +1,5 @@
 // src/scenes/Town.js
-import { Player } from '../gameobjects/player.js';
+import { Player } from '../gameobjects/Player.js';
 
 export class Town extends Phaser.Scene {
     constructor() {

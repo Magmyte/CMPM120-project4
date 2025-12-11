@@ -5,12 +5,14 @@ export class HUD extends Phaser.Scene {
     }
 
     create() {
-        const { width, height } = this.scale;
+        const { width } = this.scale;
 
+        // The player the HUD is currently tracking
+        this.currentPlayer = null;
         this.currentHealth = null;
         this.currentMax = null;
 
-        // --- HEALTH TEXT (top-left) ---
+        // --- PLAYER HEALTH TEXT ---
         this.healthText = this.add.text(
             16,
             16,
@@ -22,56 +24,46 @@ export class HUD extends Phaser.Scene {
             }
         ).setScrollFactor(0);
 
-        // --- GOD MODE TEXT (top-right) ---
-        this.godMode = this.registry.get('godMode') ?? false;
-
-        this.godText = this.add.text(
+        // --- GOD MODE INDICATOR (for testers) ---
+        this.godModeText = this.add.text(
             width - 16,
             16,
-            'GOD MODE',
+            '',
             {
                 fontFamily: 'sans-serif',
-                fontSize: 18,
-                color: '#00ffff'
+                fontSize: 16,
+                color: '#ffff00'
             }
         )
-        .setOrigin(1, 0)      // anchor top-right
-        .setScrollFactor(0)
-        .setVisible(this.godMode);
+        .setOrigin(1, 0)
+        .setScrollFactor(0);
 
-        // Listen for godMode changes from Player
-        this.registry.events.on('changedata-godMode', (parent, value) => {
-            this.godMode = value;
-            this.godText.setVisible(value);
+        // 🔔 Listen for any scene announcing its player
+        this.game.events.on('player-created', (player) => {
+            this.currentPlayer = player;
+            this.currentHealth = player.health;
+            this.currentMax = player.maxHealth;
+            this.healthText.setText(`HP: ${player.health}/${player.maxHealth}`);
         });
     }
 
-    // Try to find the current player in active gameplay scenes
-    getActivePlayer() {
-        const town = this.scene.get('Town');
-        if (town && town.scene.isActive() && town.player) {
-            return town.player;
-        }
-
-        const d1 = this.scene.get('Dungeon1');
-        if (d1 && d1.scene.isActive() && d1.player) {
-            return d1.player;
-        }
-
-        return null;
-    }
-
     update() {
-        const player = this.getActivePlayer();
-        if (!player) return;
+        const player = this.currentPlayer;
 
-        const hp  = player.health;
-        const max = player.maxHealth;
+        if (player) {
+            const hp  = player.health;
+            const max = player.maxHealth;
 
-        if (hp !== this.currentHealth || max !== this.currentMax) {
-            this.currentHealth = hp;
-            this.currentMax = max;
-            this.healthText.setText(`HP: ${hp}/${max}`);
+            if (hp !== this.currentHealth || max !== this.currentMax) {
+                this.currentHealth = hp;
+                this.currentMax = max;
+                this.healthText.setText(`HP: ${hp}/${max}`);
+            }
+
+            // God mode indicator
+            this.godModeText.setText(player.godMode ? 'GOD MODE (TESTING)' : '');
+        } else {
+            this.godModeText.setText('');
         }
     }
 }

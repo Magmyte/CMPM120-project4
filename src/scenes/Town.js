@@ -291,4 +291,3 @@ export class Town extends Phaser.Scene {
         }
     }
 }
-}

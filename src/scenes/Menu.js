@@ -7,6 +7,7 @@ export class Menu extends Phaser.Scene {
     preload() {
         // If you want a logo or background image, load it here.
         // For now we just use solid-color background + text.
+        this.load.audio('music_menu', 'assets/audio/Title Theme.wav');
     }
 
     create() {
@@ -87,6 +88,16 @@ export class Menu extends Phaser.Scene {
             color: '#bbbbbb'
         });
         hint.setOrigin(0.5, 0.5);
+
+        this.music = this.sound.add('music_menu', { loop: true, volume: 0.4 });
+        this.music.play();
+
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+            if (this.music) this.music.stop();
+        });
+        this.events.on(Phaser.Scenes.Events.DESTROY, () => {
+            if (this.music) this.music.stop();
+        });
     }
 
     startGame() {

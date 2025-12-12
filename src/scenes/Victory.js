@@ -3,6 +3,11 @@ export class Victory extends Phaser.Scene {
     constructor() {
         super('Victory');
     }
+    preload() {
+        // any images/backgrounds you use...
+
+        this.load.audio('music_victory', 'assets/audio/The Final of The Fantasy.wav');
+    }
 
     create() {
         const { width, height } = this.scale;
@@ -93,6 +98,16 @@ export class Victory extends Phaser.Scene {
                 color: '#bbbbbb'
             }
         ).setOrigin(0.5, 0.5);
+
+        this.music = this.sound.add('music_victory', { loop: true, volume: 0.4 });
+        this.music.play();
+
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+            if (this.music) this.music.stop();
+        });
+        this.events.on(Phaser.Scenes.Events.DESTROY, () => {
+            if (this.music) this.music.stop();
+        });
     }
 
     update() {

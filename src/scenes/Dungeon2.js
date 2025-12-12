@@ -32,6 +32,11 @@ export class Dungeon2 extends Phaser.Scene {
 
         this.load.image('axe', 'assets/kenney_tiny-dungeon/Tiles/tile_0118.png');
         // this.load.image('', 'assets/kenney_tiny-dungeon/Tiles/tile_0000.png');
+
+        this.load.audio('music_dungeon2', 'assets/audio/Frozen Abyss.wav');
+        this.load.audio('sfx_slash', 'assets/audio/22_Slash_04.wav');   // directional slash
+        this.load.audio('sfx_spin',  'assets/audio/03_Claw_03.wav');    // spin attack
+        this.load.image('step_dust', 'assets/particles/step_dust.png');
     }
 
     create() {
@@ -242,6 +247,16 @@ export class Dungeon2 extends Phaser.Scene {
         .setOrigin(0.5, 0.5)
         .setScrollFactor(0)
         .setVisible(false);
+
+        this.music = this.sound.add('music_dungeon2', { loop: true, volume: 0.4 });
+        this.music.play();
+
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+            if (this.music) this.music.stop();
+        });
+        this.events.on(Phaser.Scenes.Events.DESTROY, () => {
+            if (this.music) this.music.stop();
+        });
     }
 
     update(time, dTime) {

@@ -18,6 +18,15 @@ export class Dungeon1 extends Phaser.Scene {
         this.load.image('chest_closed', 'assets/kenney_tiny-dungeon/Tiles/tile_0089.png');
         this.load.image('chest_open',   'assets/kenney_tiny-dungeon/Tiles/tile_0091.png');
         this.load.image('key_icon',     'assets/kenney_tiny-town/Tiles/tile_0117.png');
+        this.load.audio('music_dungeon1', 'assets/audio/Lost Shrine.wav');
+        this.load.audio('sfx_potion', 'assets/audio/02_Heal_02.wav');
+        this.load.audio('sfx_slash', 'assets/audio/22_Slash_04.wav');   // directional slash
+        this.load.audio('sfx_spin',  'assets/audio/03_Claw_03.wav');    // spin attack
+        this.load.audio('ghost_flee', 'assets/audio/51_Flee_02.wav');
+
+        // Particle effect for ghost death
+        this.load.image('ghost_poof', 'assets/particles/ghost_poof.png');
+        this.load.image('step_dust', 'assets/particles/step_dust.png');
     }
 
     init(data) {
@@ -40,6 +49,8 @@ export class Dungeon1 extends Phaser.Scene {
         if (buildingLayer)  buildingLayer.setCollisionByExclusion([-1]);
         if (hazardLayer)    hazardLayer.setCollisionByExclusion([-1]);
         if (platformsLayer) platformsLayer.setCollisionByExclusion([-1]);
+
+        
 
         // --- PLAYER SPAWN ---
         const spawnLayer = map.getObjectLayer('PlayerSpawn');
@@ -192,6 +203,16 @@ export class Dungeon1 extends Phaser.Scene {
         .setScrollFactor(0)
         .setVisible(false);
 
+        this.music = this.sound.add('music_dungeon1', { loop: true, volume: 0.4 });
+        this.music.play();
+
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+            if (this.music) this.music.stop();
+        });
+        this.events.on(Phaser.Scenes.Events.DESTROY, () => {
+            if (this.music) this.music.stop();
+        });
+
     }
 
     // Spawn the reward chest from object layer "Reward Chest"
@@ -286,7 +307,11 @@ export class Dungeon1 extends Phaser.Scene {
         // Make sure we have the scene's player object
         const player = this.player;
         if (!player) return;
-
+        if (this.sound) {
+            this.sound.play('sfx_potion', {
+                volume: 0.6   // adjust to taste
+            });
+        }
         // Reset health to full
         player.health = player.maxHealth;
         console.log('[Dungeon1] Potion picked up — HP restored to', player.health);

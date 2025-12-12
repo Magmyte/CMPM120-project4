@@ -25,6 +25,12 @@ export class BossArena extends Phaser.Scene {
 
         // --- BOSS POTION PROJECTILE ---
         this.load.image('boss_potion', 'assets/kenney_tiny-dungeon/Tiles/tile_0114.png');
+
+        this.load.audio('music_boss', 'assets/audio/Final Battle - For Love.wav');
+        this.load.audio('sfx_slash', 'assets/audio/22_Slash_04.wav');   // directional slash
+        this.load.audio('sfx_spin',  'assets/audio/03_Claw_03.wav');    // spin attack
+        this.load.audio('boss_die', 'assets/audio/69_Enemy_death_01.wav');
+        this.load.image('step_dust', 'assets/particles/step_dust.png');
     }
 
     init(data) {
@@ -218,6 +224,16 @@ export class BossArena extends Phaser.Scene {
 
         // Portals back to Town
         this.setupPortalsFromSpawn(map);
+
+        this.music = this.sound.add('music_boss', { loop: true, volume: 0.4 });
+        this.music.play();
+
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+            if (this.music) this.music.stop();
+        });
+        this.events.on(Phaser.Scenes.Events.DESTROY, () => {
+            if (this.music) this.music.stop();
+        });
     }
 
     // Helper: boss calls this to spawn a potion projectile
@@ -287,6 +303,8 @@ export class BossArena extends Phaser.Scene {
 
         console.log('Boss doors opened!');
     }
+
+
 
     update(time, delta) {
         // Door interaction

@@ -40,6 +40,12 @@ export class Town extends Phaser.Scene {
         // Optional: enemy / projectile
         this.load.image('enemy', 'assets/kenney_tiny-dungeon/Tiles/tile_0000.png');
         this.load.image('projectile', 'assets/kenney_tiny-dungeon/Tiles/tile_0032.png');
+        //audio
+        this.load.audio('music_town', 'assets/audio/Where The Winds Roam.wav');
+        this.load.audio('sfx_slash', 'assets/audio/22_Slash_04.wav');   // directional slash
+        this.load.audio('sfx_spin',  'assets/audio/03_Claw_03.wav');    // spin attack
+
+        this.load.image('step_dust', 'assets/particles/step_dust.png');
     }
 
     create() {
@@ -145,6 +151,16 @@ export class Town extends Phaser.Scene {
         .setOrigin(0.5, 0.5)
         .setScrollFactor(0)
         .setVisible(false);
+
+        this.music = this.sound.add('music_town', { loop: true, volume: 0.4 });
+        this.music.play();
+
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+            if (this.music) this.music.stop();
+        });
+        this.events.on(Phaser.Scenes.Events.DESTROY, () => {
+            if (this.music) this.music.stop();
+        });
     }
 
     showDialogue(target) {
